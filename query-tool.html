@@ -2,99 +2,34 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>电池型号关键词查询工具</title>
+    <title>查询工具</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Microsoft Yahei", system-ui, sans-serif;
-        }
         body {
-            background: linear-gradient(135deg,#f0f7ff,#fef6ff);
-            min-height: 100vh;
-            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+            margin: 30px;
+            line-height: 1.6;
         }
-        .wrap {
-            max-width: 920px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 35px;
-            border-radius: 18px;
-            box-shadow: 0 8px 30px rgba(0,80,180,0.08);
-        }
-        h2 {
-            text-align: center;
-            font-size: 26px;
-            background: linear-gradient(90deg,#2574e3,#984cff);
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 28px;
-            letter-spacing:1px;
-        }
-        #inputKey {
-            width:100%;
-            padding:14px 18px;
-            font-size:16px;
-            border:1px solid #dde4f2;
-            border-radius:12px;
-            outline:none;
-            transition:0.3s;
-        }
-        #inputKey:focus {
-            border-color:#2574e3;
-            box-shadow:0 0 0 3px rgba(37,116,227,0.15);
-        }
-        .btn-box {
-            margin:18px 0;
-        }
-        button {
-            padding:12px 26px;
-            font-size:15px;
-            border:none;
-            border-radius:10px;
-            cursor:pointer;
-            transition:0.25s;
-        }
-        #searchBtn {
-            background:#2574e3;
-            color:#fff;
-            margin-right:14px;
-        }
-        #searchBtn:hover {
-            background:#1b5fc9;
-            transform: translateY(-2px);
-        }
-        #copyBtn {
-            background:#22b96c;
-            color:#fff;
-        }
-        #copyBtn:hover {
-            background:#1ea05e;
-            transform: translateY(-2px);
+        input, button {
+            font-size: 16px;
+            padding: 6px 12px;
+            margin: 5px;
         }
         #result {
+            margin-top: 20px;
             white-space: pre-line;
-            padding:20px;
-            background:#f8fbff;
-            border:1px solid #e5edfb;
-            border-radius:12px;
-            min-height:320px;
-            line-height:1.7;
-            font-size:15px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            min-height: 300px;
         }
     </style>
 </head>
 <body>
-<div class="wrap">
-    <h2>电池型号关键词查询工具</h2>
-    <input id="inputKey" placeholder="输入电池型号，例：NP-FZ100">
-    <div class="btn-box">
-        <button id="searchBtn" onclick="search()">查询</button>
-        <button id="copyBtn" onclick="copyResult()">复制结果</button>
-    </div>
-    <div id="result"></div>
-</div>
+
+<h2>查询工具</h2>
+<input id="inputKey" placeholder="输入型号">
+<button onclick="search()">查询</button>
+<button onclick="copyResult()">复制结果</button>
+<div id="result"></div>
 
 <script>
 const answers = {
@@ -105,7 +40,6 @@ function search() {
     let key = document.getElementById("inputKey").value.trim().toUpperCase();
     let res = document.getElementById("result");
     let found = false;
-
     for (let k in answers) {
         if (k.toUpperCase() === key) {
             res.innerText = answers[k];
@@ -113,7 +47,6 @@ function search() {
             break;
         }
     }
-
     if (!found) {
         res.innerText = "未找到对应内容";
     }
@@ -122,7 +55,7 @@ function search() {
 function copyResult() {
     let res = document.getElementById("result");
     if (!res.innerText || res.innerText === "未找到对应内容") {
-        alert("没有可复制的内容");
+        alert("暂无内容可复制");
         return;
     }
     navigator.clipboard.writeText(res.innerText).then(() => {
@@ -132,5 +65,6 @@ function copyResult() {
     });
 }
 </script>
+
 </body>
 </html>
